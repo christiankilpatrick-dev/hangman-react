@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Header from './components/Header';
+import Figure from './components/Figure';
+import WrongLetters from './components/WrongLetters';
+import Word from './components/Word';
 import './App.css';
 
+const words = ['application', 'programming', 'interface', 'wizard'];
+
+let selectedWord = words[Math.floor(Math.random() * words.length)];
+
+let playable = true;
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [playable, setPlayable] = useState(true);
+	const [correctLetters, setCorrectLetters] = useState([]);
+	const [wrongLetters, setWrongLetters] = useState([]);
+
+	return (
+		<>
+			<Header />
+			<div className="game-container">
+				<Figure />
+				<WrongLetters />
+				<Word selectedWord={selectedWord} correctLetters={correctLetters} />
+			</div>
+		</>
+	);
 }
 
 export default App;
